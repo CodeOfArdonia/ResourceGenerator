@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 public final class SingleBlockGeneratorData extends BlockGeneratorDataBase {
@@ -35,5 +37,10 @@ public final class SingleBlockGeneratorData extends BlockGeneratorDataBase {
     @Override
     protected BlockState getNextBlock() {
         return this.state;
+    }
+
+    @Override
+    public MutableText getInfo() {
+        return super.getInfo().append(Text.literal("\nBlock: %s".formatted(this.state.toString())));
     }
 }

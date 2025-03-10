@@ -6,6 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.HoverEvent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.List;
@@ -37,5 +41,10 @@ public final class SingleItemGeneratorData extends ItemGeneratorDataBase {
     @Override
     public List<ItemStack> getNextItems(ServerWorld world) {
         return List.of(this.stack);
+    }
+
+    @Override
+    public MutableText getInfo() {
+        return super.getInfo().append(Text.literal("\nItem: %s".formatted(this.stack.toString())).fillStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackContent(this.stack)))));
     }
 }

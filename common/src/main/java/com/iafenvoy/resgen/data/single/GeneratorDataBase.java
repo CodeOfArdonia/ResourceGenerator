@@ -6,6 +6,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 public abstract sealed class GeneratorDataBase implements Serializeable permits BlockGeneratorDataBase, ItemGeneratorDataBase {
@@ -37,6 +39,10 @@ public abstract sealed class GeneratorDataBase implements Serializeable permits 
         this.currentTick = nbt.getInt("currentTick");
     }
 
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
+
     public abstract void generate(ServerWorld world);
 
     public GeneratorType getType() {
@@ -64,9 +70,13 @@ public abstract sealed class GeneratorDataBase implements Serializeable permits 
         return this.shouldProtect && !this.type.isBlock();
     }
 
+    public MutableText getInfo() {
+        return Text.literal("[x=%d,y=%d,z=%d] | Protected: %b\nType: %s | Interval: %d".formatted(this.pos.getX(), this.pos.getY(), this.pos.getZ(), this.shouldProtect(), this.type.toString(), this.interval));
+    }
+
     public static NbtCompound encode(GeneratorDataBase data) {
         NbtCompound nbt = new NbtCompound();
-        nbt.putString("type", data.type.toString());
+        nbt.putString("type", data.type.name());
         nbt.putLong("pos", data.pos.asLong());
         nbt.put("data", data.writeToNbt());
         return nbt;

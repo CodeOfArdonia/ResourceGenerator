@@ -1,6 +1,7 @@
 package com.iafenvoy.resgen.data;
 
 import com.iafenvoy.resgen.data.single.*;
+import com.iafenvoy.resgen.util.StringUtils;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 
@@ -29,5 +30,10 @@ public enum GeneratorType {
 
     public boolean isBlock() {
         return this.isBlock;
+    }
+
+    @Override
+    public String toString() {
+        return StringUtils.formatNameString(this.name());
     }
 }

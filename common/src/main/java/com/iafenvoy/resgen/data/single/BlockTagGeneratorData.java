@@ -9,6 +9,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -20,6 +22,10 @@ public final class BlockTagGeneratorData extends BlockGeneratorDataBase {
 
     public BlockTagGeneratorData(BlockPos pos) {
         super(GeneratorType.BLOCK_TAG, pos);
+    }
+
+    public BlockTagGeneratorData(BlockPos pos, Identifier tagId) {
+        this(pos, TagKey.of(RegistryKeys.BLOCK, tagId));
     }
 
     public BlockTagGeneratorData(BlockPos pos, TagKey<Block> blockTag) {
@@ -48,5 +54,10 @@ public final class BlockTagGeneratorData extends BlockGeneratorDataBase {
     @Override
     protected BlockState getNextBlock() {
         return RandomHelper.randomOne(this.blocks).getDefaultState();
+    }
+
+    @Override
+    public MutableText getInfo() {
+        return super.getInfo().append(Text.literal("\nBlock Tag: %s".formatted(this.blockTag.id().toString())));
     }
 }

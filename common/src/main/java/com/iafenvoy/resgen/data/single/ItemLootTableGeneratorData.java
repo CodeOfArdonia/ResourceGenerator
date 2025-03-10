@@ -7,6 +7,7 @@ import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -42,5 +43,10 @@ public final class ItemLootTableGeneratorData extends ItemGeneratorDataBase {
     @Override
     public List<ItemStack> getNextItems(ServerWorld world) {
         return world.getServer().getLootManager().getLootTable(this.lootTable).generateLoot(this.paramsFunc.apply(world));
+    }
+
+    @Override
+    public MutableText getInfo() {
+        return super.getInfo().append("\nLoot Table: %s".formatted(this.lootTable.toString()));
     }
 }

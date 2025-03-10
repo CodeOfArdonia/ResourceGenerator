@@ -3,15 +3,14 @@
   "id": "resource_generator",
   "version": "${version}",
   "name": "Resource Generator",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "A server side resource generator mod",
   "authors": [
-    "Me!"
+    "IAFEnvoy"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/CodeOfArdonia/ResourceGenerator"
   },
-  "license": "CC0-1.0",
+  "license": "All Right Reserved",
   "icon": "assets/resource_generator/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -26,12 +25,6 @@
     "resource_generator.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.16.10",
-    "minecraft": "~1.20.1",
-    "java": ">=17",
-    "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "minecraft": "~1.20.1"
   }
 }

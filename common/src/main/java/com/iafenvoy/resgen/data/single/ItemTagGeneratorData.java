@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -21,6 +22,10 @@ public final class ItemTagGeneratorData extends ItemGeneratorDataBase {
 
     public ItemTagGeneratorData(BlockPos pos) {
         super(GeneratorType.ITEM_TAG, pos);
+    }
+
+    public ItemTagGeneratorData(BlockPos pos, Identifier tagId) {
+        this(pos, TagKey.of(RegistryKeys.ITEM, tagId));
     }
 
     public ItemTagGeneratorData(BlockPos pos, TagKey<Item> itemTag) {
@@ -49,5 +54,10 @@ public final class ItemTagGeneratorData extends ItemGeneratorDataBase {
     @Override
     public List<ItemStack> getNextItems(ServerWorld world) {
         return List.of(RandomHelper.randomOne(this.items).getDefaultStack());
+    }
+
+    @Override
+    public MutableText getInfo() {
+        return super.getInfo().append("\nItem Tag: %s".formatted(this.itemTag.id().toString()));
     }
 }
