@@ -79,7 +79,7 @@ tasks.register('copyJars', Copy) {
     from('forge/build/libs') {
         include "${rootProject.archives_name}-forge-${rootProject.mod_version}.jar"
         rename { String fileName ->
-            "${rootProject.archives_name}-${rootProject.mod_version}-${rootProject.minecraft_version}-forge"
+            "${rootProject.archives_name}-${rootProject.mod_version}-${rootProject.minecraft_version}-forge.jar"
         }
     }
     into 'build/libs'

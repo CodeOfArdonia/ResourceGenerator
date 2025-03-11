@@ -11,7 +11,7 @@
     "sources": "https://github.com/CodeOfArdonia/ResourceGenerator"
   },
   "license": "All Right Reserved",
-  "icon": "assets/resource_generator/icon.png",
+  "icon": "logo.png",
   "environment": "*",
   "entrypoints": {
     "main": [

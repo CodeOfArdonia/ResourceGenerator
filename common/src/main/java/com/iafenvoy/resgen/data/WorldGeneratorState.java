@@ -35,7 +35,12 @@ public class WorldGeneratorState extends PersistentState {
     }
 
     public void tick() {
-        this.data.forEach(x -> x.tick(this.world));
+        this.data.stream().filter(x -> this.isPosLoaded(x.getPos())).forEach(x -> x.tick(this.world));
+    }
+
+    public boolean isPosLoaded(BlockPos pos) {
+        ChunkPos p = new ChunkPos(pos);
+        return this.world.isChunkLoaded(p.x, p.z);
     }
 
     @Override
